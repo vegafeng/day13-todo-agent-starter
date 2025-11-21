@@ -46,8 +46,9 @@ public class ToolLoader {
      */
     @PostConstruct
     private void initializeTools() {
-        // 延迟扫描，避免循环依赖
-        logger.info("ToolLoader initialized, tool scanning will be performed on first access");
+        logger.info("ToolLoader initialized, starting tool scanning...");
+        // 立即扫描所有工具，确保在 MCP 服务器启动前完成
+        ensureToolsScanned();
     }
 
     /**
@@ -103,11 +104,14 @@ public class ToolLoader {
                 if (hasToolMethods) {
                     scannedToolBeans.add(bean);
                     toolBeansFound++;
-                    logger.info("Registered tool bean: {} ({})", beanName, beanClass.getSimpleName());
+                    logger.info("Registered tool bean: {} ({}) with {} @Tool methods", 
+                            beanName, beanClass.getSimpleName(), 
+                            methods.length > 0 ? (int)java.util.Arrays.stream(methods).filter(m -> m.isAnnotationPresent(org.springframework.ai.tool.annotation.Tool.class)).count() : 0);
                 }
 
             } catch (Exception e) {
-                logger.debug("Failed to scan bean: {}", beanName, e);
+                logger.warn("Failed to scan bean: {} - {}", beanName, e.getMessage());
+                logger.debug("Full stack trace:", e);
             }
         }
 

@@ -1,12 +1,17 @@
+#logging:
+#  level:
+#    com.afs.restapi.agent: DEBUG
+#    com.afs.restapi: DEBUG
+
 spring:
   profiles:
     active: dev # use application-dev.yml
 
   datasource:
-    url: jdbc:mysql://localhost:3306/afs
+    url: jdbc:mysql://localhost:3306/todo
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: "afs"
-    password: "afs"
+    username: root
+    password: 123456
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
@@ -14,11 +19,10 @@ spring:
       ddl-auto: update
 
 # create application-dev.yml, then copy follow code:
-#sprig:
-#  ai:
-#    openai:
-#      base-url: https://api.deepseek.com
-#      api-key:
-#      chat:
-#        options:
-#          model: deepseek-chat
+  ai:
+    openai:
+      base-url: https://api.deepseek.com  # OpenAI API 基础 URL
+      api-key: sk-0cc7bae2d01d4c3388a728f31e753271  # OpenAI API 密钥
+      chat:
+        options:
+          model: deepseek-chat  # 使用的聊天模型

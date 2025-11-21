@@ -1,0 +1,93 @@
+{
+  "apiTools": [
+    {
+      "name": "updateShipmentPOR",
+      "description": "Update the POR (Port of Receipt) for a specific shipment. This tool modifies the port of receipt information for a given shipment number and POR ID.",
+      "method": "PUT",
+      "url": "http://irisbackendqa5.lines.coscoshipping.com/wls_dom_shp/rest/shipment/updateShpPOR/{shipmentNumber},{porId}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "parameters": [
+        {
+          "name": "shipmentNumber",
+          "type": "String",
+          "location": "path",
+          "description": "Shipment number, e.g., '7261242220'",
+          "required": true
+        },
+        {
+          "name": "porId",
+          "type": "String",
+          "location": "path",
+          "description": "POR ID, e.g., '738872886233503'",
+          "required": true
+        }
+      ],
+      "requestBody": {},
+      "successMessage": "✅ Successfully updated POR for shipment {shipmentNumber} with POR ID {porId}",
+      "errorMessage": "❌ Failed to update POR for shipment {shipmentNumber}"
+    },
+    {
+      "name": "verifyShipment",
+      "description": "Verify shipment information and check if the POR update was successful. This tool retrieves detailed information about a shipment by its number.",
+      "method": "GET",
+      "url": "https://irisqa5.lines.coscoshipping.com/wls_prs_shv/secured/shipment/viewShp",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "type": "String",
+          "location": "query",
+          "description": "Query type",
+          "required": true,
+          "defaultValue": "browse"
+        },
+        {
+          "name": "shipmentNumber",
+          "type": "String",
+          "location": "query",
+          "description": "Shipment number to verify",
+          "required": true
+        }
+      ],
+      "successMessage": "✅ Shipment verification successful for {shipmentNumber}",
+      "errorMessage": "❌ Failed to verify shipment {shipmentNumber}"
+    },
+    {
+        "name": "createBooking",
+        "description": "Create booking for QA3 environment. This tool creates a new booking in the IRIS system using predefined test data.",
+        "method": "GET",
+        "url": "https://gqa.oocl.com/apibotbackend/api/test",
+        "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Cookie": "AuthSessionId=aeae5270-b871-4ee0-b81f-319ab336958e; HOME_SHIFT_CARRIER=0; FRM_SSO_REFRESH_TOKEN=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjMTY1MzIxNy0wMzA4LTQ1MDgtOGFmMC02NmY3MGFiMjZkYjMifQ.eyJleHAiOjE3NjMzNDc1MzYsImlhdCI6MTc2MzM0MDMzNiwianRpIjoiODNmYWNiYmUtMjI2Ni00ZDZjLWFhODctYmRlMDRkYTg5NTZhIiwiaXNzIjoiaHR0cHM6Ly9pYW1mdy5ob21lLW5wLm9vY2wuY29tL2F1dGgvcmVhbG1zL29vY2wtaW50IiwiYXVkIjoiaHR0cHM6Ly9pYW1mdy5ob21lLW5wLm9vY2wuY29tL2F1dGgvcmVhbG1zL29vY2wtaW50Iiwic3ViIjoiNzRmZTIwNjItNGE0MS00MmI3LThjZTUtN2I1ZjczOGQxZGUwIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IklSSVM0LVNTTy1RQTQiLCJzaWQiOiI1NGE5NDQyNS1kN2JkLTQ0ZmEtOTVkNi0yMWI3N2E5NGE0MWEiLCJzY29wZSI6Im9wZW5pZCBhcHBsaWNhdGlvbl9zY29wZSBiYXNpYyBpZGVudGl0eV9zdXBwbGVtZW50IHByb2ZpbGUgZW1haWwifQ.D93yuycv6B2C2FVBtaD7ewTQoB4_khpcjnpmJC7Oia2HIQDjOk2XIssgK4Z9U4zZz3545SMcyvErlFbxhVJUFA; SSO_IRIS4_OPENTOKEN_COOKIE_QA4=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyb2I4ZjJDd3JfLWJvZzJ4TnZxM1pkX0ticDNWcTEwT0drWVdmbU5hOGk4In0.eyJleHAiOjE3NjMzODM1MzQsImlhdCI6MTc2MzM0MDMzNCwiYXV0aF90aW1lIjoxNzYzMzQwMzM0LCJqdGkiOiIzODgwZjUyZC1mYzI2LTQzN2ItYTgyZC00ODNkYzVmYjMxYTIiLCJpc3MiOiJodHRwczovL2lhbWZ3LmhvbWUtbnAub29jbC5jb20vYXV0aC9yZWFsbXMvb29jbC1pbnQiLCJzdWIiOiI3NGZlMjA2Mi00YTQxLTQyYjctOGNlNS03YjVmNzM4ZDFkZTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJJUklTNC1TU08tUUE0Iiwic2lkIjoiNTRhOTQ0MjUtZDdiZC00NGZhLTk1ZDYtMjFiNzdhOTRhNDFhIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInRlbmFudF9pZCI6ImM0MDhiMWY4LTNlMDQtNDZhMi1hOWM3LWU2M2JiMmVjM2UyMiIsImF1ZCI6WyJJUklTNC1TU08tUUE0Il0sInVwbiI6IkZFTkdWRUBPT0NMLkNPTSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlZFR0EgRkVORyIsInByZWZlcnJlZF91c2VybmFtZSI6ImZlbmd2ZUBvb2NsLmNvbSIsImdpdmVuX25hbWUiOiJWRUdBIiwiZmFtaWx5X25hbWUiOiJGRU5HIiwiZW1haWwiOiJ2ZWdhLmZlbmdAb29jbC5jb20ifQ.pi5ityRnLSA2MQyFcwWhbw3cGDmSOMq01ybMNCmsVnw4XBo5mPSRGQjUnFYzxhukeXAvieq6j7FZn3F35lNQHS8rWTHCMA9tEAOCqliuQr0ThPPOStVZOBmaUbBRw5p8VJR8UFf9uQyJ5xJAdtayT0r7MzN1WzeaDohaA1Dt2nTGbDD6r4HRlH-HGaQSqgbj7iKxpQcQhOIrw_K8vZbmD7MafrkAT-B6IMxtujuPsgwOD1VuLYzKxj81QWcbP7F55co0sJzPq8DbJJEr1IZWuDVFMxvyhOVpw1nkMr4PT7ZJrJyKENCCiZXjEVpKJdi9N9TpBhx-wAscFc5V8uHM3Q; SSO_IRIS4_USERID_COOKIE_QA4=oo_fengve; SSO_IRIS4_SESSIONID_COOKIE_QA4=6904097e-a720-4753-ad65-114dedc745b9; SSO_IRIS4_OPENTOKEN_COOKIE_QA4_RENEW_UNTIL=2025-11-17T12:45:34Z; access_token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaMWlIdm9mdF9zZ0JLazQ5TUx4MjNWa2pCdTBrdXBrcnljUzJjaWo4NWg0In0.eyJleHAiOjE3NjMzNDk0NjEsImlhdCI6MTc2MzM0OTE2MSwiYXV0aF90aW1lIjoxNzYzMzQ3Nzk0LCJqdGkiOiJiYWJhOWM0ZS0yOTU3LTRhZTgtODQ3OC04Yzg0MzBhNzJjNjUiLCJpc3MiOiJodHRwczovL2lhbWZ3LmhvbWUub29jbC5jb20vYXV0aC9yZWFsbXMvb29jbC1wcmQiLCJzdWIiOiI1ODAzNWMwMC1lNDFjLTRmYjktODA3YS0yNmI3ZGM4ZTNmNjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJHUUFfQUNDRVNTIiwic2lkIjoiN2U5MWY1MzAtNTI0OC00YjE1LThlNGMtMGYyMmFhMzE4YzU3Iiwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInRlbmFudF9pZCI6ImM0MDhiMWY4LTNlMDQtNDZhMi1hOWM3LWU2M2JiMmVjM2UyMiIsImF1ZCI6WyJHUUFfQUNDRVNTIiwiSUFNX1BPUlRBTCJdLCJ1cG4iOiJGRU5HVkVAT09DTC5DT00iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJWRUdBIEZFTkciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZW5ndmVAb29jbC5jb20iLCJnaXZlbl9uYW1lIjoiVkVHQSIsImZhbWlseV9uYW1lIjoiRkVORyIsImVtYWlsIjoidmVnYS5mZW5nQG9vY2wuY29tIn0.pXiYQcQNZXOmMFZTnsiaa4EDF1jHmH9_AVHa0OA0zvHWCTT1y-QGwuX3jQEDWRxoG2T-cAfFpwXKXQAWmbjQWX3N-_4tf7Yod0jieWebnLvU6q2lIdNv83LxPYG-u7DTXIvn6MVzgR73L658c6rjxnzJNCgyKXPftapYrUPGkkVsVyKdoV3X1zKo2ApbYKhKbCemVEM1OqY-bnHYXWn0tAA4geNQNZOlmu3hDKROvk3SGv-DX0qsmJyNOrbt-JsIJ4-m7LLt339SBq2ln8uRQ1CY2wl0S_xJ41y17M0pLWLWl3eKS0hEq8007okwTB04y0mZ7DUZIKnz_YcqFvuwRw; upn=FENGVE; access_token_RENEW_UNTIL=2025-11-17T03:17:41Z; refresh_token=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkOWJkMTM3ZS1lMGFlLTQ3MzQtOTUyZS1hNTY2MDhjYmY3ZTUifQ.eyJleHAiOjE3NjMzNTYzNjEsImlhdCI6MTc2MzM0OTE2MSwianRpIjoiNTgxMDczODQtYjM5NS00NDMwLTg1NTktZmM2Mzk0MjljMTkzIiwiaXNzIjoiaHR0cHM6Ly9pYW1mdy5ob21lLm9vY2wuY29tL2F1dGgvcmVhbG1zL29vY2wtcHJkIiwiYXVkIjoiaHR0cHM6Ly9pYW1mdy5ob21lLm9vY2wuY29tL2F1dGgvcmVhbG1zL29vY2wtcHJkIiwic3ViIjoiNTgwMzVjMDAtZTQxYy00ZmI5LTgwN2EtMjZiN2RjOGUzZjYwIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IkdRQV9BQ0NFU1MiLCJzaWQiOiI3ZTkxZjUzMC01MjQ4LTRiMTUtOGU0Yy0wZjIyYWEzMThjNTciLCJzY29wZSI6Im9wZW5pZCBpZGVudGl0eV9zdXBwbGVtZW50IGJhc2ljIGFjciBlbWFpbCBhcHBsaWNhdGlvbl9zY29wZSBwcm9maWxlIn0.72hvqn1_cPkWPJ4iGwVXuXz1qXVT1nqC9a1p3iTm4JXVEDgvpKm58791U_cpxooZpTyaCXjsybP2jXXEL5POVA; EGG_SESS=_UtKJjanyGOlvnp4geTHD3Hix8Vy8X2Mf0VIX4hZxJ3zsJBNPx8XswJ0uB-UDu6FkceHlqI6TCAsH5KBtOTdeNrcKxaaGQVWmd0xzNnnNFBlWwHudHzdm6fsUmVgG9J6iqFY2bALjhKavWRjXE4iz-gHZSdzOfffh-xSrPOlXxxVWNIx3aMgRah2Qh1mLolv8fkt40cI6sKcycBnfqQVSA==; connect.sid=s%3AzPHnmnP5AHtmVFoj4oK10IRKb3w1gwbS.LbqEhN41ObLL18jhnpt0kG%2F8liRNEo%2BDYyRWS6iRVus"
+        },
+        "parameters": [
+            {
+            "name": "path",
+            "type": "String",
+            "location": "query",
+            "description": "Flow script path for creating booking",
+            "required": true,
+            "defaultValue": "IRIS/TESTDATA/common/bkg/createGCBKGByApplyRouteWithSVVD.flow.js"
+            },
+          {
+            "name": "env",
+            "type": "String",
+            "location": "query",
+            "description": "Target environment (qa3)",
+            "required": true,
+            "defaultValue": "qa3"
+          }
+        ],
+        "successMessage": "✅ Successfully created booking in {env} environment",
+        "errorMessage": "❌ Failed to create booking in {env} environment"
+    }
+  ]
+}

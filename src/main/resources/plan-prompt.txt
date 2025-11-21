@@ -1,3 +1,43 @@
-{{ $functions }}
+// 查询类命令 - 返回JSON数组或对象
+{{findAll}}                          // 返回: [{"id":1,"text":"todo内容","done":false}]
+{{findById}}, {{id}}                 // 返回: {"id":1,"text":"todo内容","done":false}
+{{count}}                            // 返回: {"total":4,"completed":1,"incomplete":3}
+{{status}}                           // 返回: {"total":4,"completed":1,"incomplete":3,"completionRate":0.25}
 
-{{ $input }}
+// 创建类命令 - 返回创建的todo对象
+{{create}}, {{text}}                 // 返回: {"id":5,"text":"新todo","done":false}
+{{add}}, {{text}}                    // 返回: {"id":6,"text":"新todo","done":false}
+
+// 更新类命令 - 返回更新后的todo对象或操作状态
+{{update}}, {{id}}, {{text}}, {{done}}    // 返回: {"id":1,"text":"更新后内容","done":true}
+{{updateText}}, {{id}}, {{text}}          // 返回: {"id":1,"text":"更新后内容","done":false}
+{{complete}}, {{id}}                      // 返回: {"id":1,"text":"todo内容","done":true}
+{{uncomplete}}, {{id}}                    // 返回: {"id":1,"text":"todo内容","done":false}
+{{toggle}}, {{id}}                        // 返回: {"id":1,"text":"todo内容","done":true}
+
+// 删除类命令 - 返回操作状态
+{{delete}}, {{id}}                   // 返回: {"success":true,"message":"Todo deleted","deletedId":1}
+{{remove}}, {{id}}                   // 返回: {"success":true,"message":"Todo removed","deletedId":1}
+{{clear}}                            // 返回: {"success":true,"message":"All todos cleared","deletedCount":4}
+{{clearCompleted}}                   // 返回: {"success":true,"message":"Completed todos cleared","deletedCount":2}
+{{clearIncomplete}}                  // 返回: {"success":true,"message":"Incomplete todos cleared","deletedCount":2}
+
+// 批量操作命令 - 返回操作统计
+{{deleteRange}}, {{startId}}, {{endId}}      // 返回: {"success":true,"deletedCount":3,"deletedIds":[1,2,3]}
+{{completeRange}}, {{startId}}, {{endId}}    // 返回: {"success":true,"updatedCount":3,"updatedIds":[1,2,3]}
+{{deleteAll}}                               // 返回: {"success":true,"message":"All todos deleted","deletedCount":4}
+{{completeAll}}                             // 返回: {"success":true,"message":"All todos completed","updatedCount":4}
+{{uncompleteAll}}                           // 返回: {"success":true,"message":"All todos uncompleted","updatedCount":4}
+
+// 过滤查询命令 - 返回过滤后的JSON数组
+{{listCompleted}}                    // 返回: [{"id":1,"text":"已完成todo","done":true}]
+{{listIncomplete}}                   // 返回: [{"id":2,"text":"未完成todo","done":false}]
+{{search}}, {{keyword}}              // 返回: [{"id":1,"text":"包含关键词的todo","done":false}]
+{{filter}}, {{done}}                 // 返回: [{"id":1,"text":"符合条件的todo","done":true}]
+
+// 系统信息命令 - 返回系统状态JSON
+{{backup}}                           // 返回: {"todos":[...],"timestamp":"2025-09-18T10:30:00Z","total":4}
+{{statistics}}                       // 返回: {"total":4,"completed":1,"incomplete":3,"completionRate":0.25,"lastUpdated":"2025-09-18T10:30:00Z"}
+{{help}}                             // 返回: {"commands":[...],"version":"1.0","description":"Todo MCP命令帮助"}
+{{refresh}}                          // 返回: {"success":true,"message":"Data refreshed","timestamp":"2025-09-18T10:30:00Z"}
+
