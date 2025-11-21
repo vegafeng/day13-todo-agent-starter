@@ -4,8 +4,12 @@ import com.afs.restapi.entity.Todo;
 import com.afs.restapi.exception.TodoNotFoundException;
 import com.afs.restapi.repository.TodoRepository;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 
 
@@ -47,5 +51,33 @@ public class TodoService {
             throw new TodoNotFoundException(id);
         }
         todoRepository.deleteById(id);
-    }
+     }
+// // to get todo by text
+//     @Tool(description = "Get todo by text")
+//     public List<Todo> findByText(String text) {
+//         return todoRepository.findByTextContainingIgnoreCase(text);
+//     }
+
+//     @Tool(description = "Get the content of the README.md file")
+//     public String getReadmeContent() throws IOException {
+//         ClassPathResource resource = new ClassPathResource("README.md");
+//         return Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
+//     }   
+//     // to get todo by people owning it
+//     @Tool(description = "Get todo by owner")
+//     public List<Todo> findByOwner(String owner) {
+//         return todoRepository.findByOwnerContainingIgnoreCase(owner);
+//     }
+
+//     // to delete all my data
+//     @Tool(description = "Delete all todos by owner")
+//     public void deleteByOwner(String owner) {
+//         todoRepository.deleteByOwnerContainingIgnoreCase(owner);
+//     }
+
+//     // delete all data from database
+//     @Tool(description = "Delete all todos")
+//     public void deleteAll() {
+//         todoRepository.deleteAll();
+//     }
 }

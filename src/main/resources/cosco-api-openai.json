@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "COSCO shipment POR更新服务",
+    "version": "1.0.0",
+    "description": "MCP标准化服务：更新指定shipment的POR信息"
+  },
+  "servers": [
+    { "url": "http://localhost:8080/mcp/services", "description": "MCP服务地址" }
+  ],
+  "paths": {
+    "/cosco/updateShpPOR": {
+      "post": {
+        "summary": "更新POR信息",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipmentIds": {
+                    "type": "string",
+                    "description": "逗号分隔的shipment ID，如7261242220,738872886233503"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

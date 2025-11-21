@@ -8,7 +8,7 @@ group = 'com.afs'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '21'
 }
 
 repositories {
@@ -25,7 +25,11 @@ dependencies {
 
     implementation "org.springframework.ai:spring-ai-starter-model-openai:1.0.1"
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server:1.0.1'
-    /// https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html
+	implementation 'org.springframework.ai:spring-ai-mcp:1.0.1'
+	// HTTP客户端（用于调用原API）
+	implementation 'org.springframework.boot:spring-boot-starter-webflux:3.2.0'
+
+	/// https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc:1.0.1'
 
 	runtimeOnly 'com.h2database:h2'
